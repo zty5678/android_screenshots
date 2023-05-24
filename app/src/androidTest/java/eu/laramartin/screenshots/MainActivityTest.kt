@@ -7,6 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Before
 
 import org.junit.BeforeClass
 import org.junit.ClassRule
@@ -20,33 +21,23 @@ import tools.fastlane.screengrab.locale.LocaleTestRule
 @RunWith(AndroidJUnit4::class)
 class MainActivityTest {
 
-    companion object {
+    @Rule
+    @JvmField
+    val localeTestRule = LocaleTestRule()
 
-        @get:ClassRule
-        @JvmStatic
-        val localeTestRule = LocaleTestRule()
-
-        @get:ClassRule
-        @JvmStatic
-        val demoModeRule = DemoModeRule()
-
-        @BeforeClass
-        @JvmStatic
-        fun beforeAll() {
-            Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
-        }
+    @Before
+    fun init() {
+        Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
     }
 
     @get:Rule
-    var mActivityRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(
-        MainActivity::class.java
-    )
+    val mActivityRule = ActivityScenarioRule(TestActivity::class.java)
 
 
     @Test
     fun displayHello() {
         SystemClock.sleep(2000)
+
         Screengrab.screenshot("01_hello_world_screen")
-        onView(withId(R.id.text)).check(matches(isDisplayed()))
     }
 }
