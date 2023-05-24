@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-
-locales=('en-US' 'es-ES')
-tests_apk_path="/Users/lara/dev/GitHub/android_screenshots/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
-app_apk_path="/Users/lara/dev/GitHub/android_screenshots/app/build/outputs/apk/debug/app-debug.apk"
+# deprecated! use ```fastlane android screenshots```
+locales=('en-US' 'zh-CN')
+tests_apk_path="app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk"
+app_apk_path="app/build/outputs/apk/debug/app-debug.apk"
 
 ./gradlew assembleDebug assembleAndroidTest
 
-rm -r /Users/lara/dev/GitHub/android_screenshots/fastlane/metadata/android/
+rm -r fastlane/metadata/android/
 
 function start_clean_status_bar {
     # Start demo mode

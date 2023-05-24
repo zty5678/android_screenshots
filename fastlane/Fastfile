@@ -50,6 +50,12 @@ platform :android do
     # )
   end
 
+  lane :screenshots do
+     gradle(task: "clean assembleDebug assembleAndroidTest")
+     screengrab
+  end
+
+
   error do |lane, exception|
     # slack(
     #   message: exception.message,

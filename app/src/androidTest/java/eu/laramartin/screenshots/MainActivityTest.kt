@@ -1,12 +1,13 @@
 package eu.laramartin.screenshots
 
 import android.os.SystemClock
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+
 import org.junit.BeforeClass
 import org.junit.ClassRule
 import org.junit.Rule
@@ -37,7 +38,10 @@ class MainActivityTest {
     }
 
     @get:Rule
-    val activityRule = ActivityTestRule(MainActivity::class.java)
+    var mActivityRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(
+        MainActivity::class.java
+    )
+
 
     @Test
     fun displayHello() {
